@@ -118,7 +118,7 @@ public class GameUI : MonoBehaviour
         healthBar.gameObject.SetActive(false);
         gameOverScore.text = score.text;
         gameOver.SetActive(true);
-        ShowInterstitialAd("1lcaf5895d5l1293dc",
+        ShowInterstitialAd("qr4u1s7sn732lg7hlb",
             () => {
                 Debug.LogError("--插屏广告完成--");
 
@@ -151,7 +151,7 @@ public class GameUI : MonoBehaviour
     }
     public void Continue()
     {
-        ShowVideoAd("192if3b93qo6991ed0",
+        ShowVideoAd("hdege9h92277fl87kg",
             (bol) => {
                 if (bol)
                 {

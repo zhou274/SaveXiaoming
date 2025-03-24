@@ -1,55 +1,55 @@
-using StarkSDKSpace;
 using System.Collections;
 using System.Collections.Generic;
-using TTSDK.UNBridgeLib.LitJson;
-using TTSDK;
 using UnityEngine;
+using StarkSDKSpace;
+using TTSDK;
+using TTSDK.UNBridgeLib.LitJson;
+using static StarkSDKSpace.StarkGridGamePanelManager;
+using UnityEngine.SceneManagement;
+
 
 public class CebianlanManager : MonoBehaviour
 {
+
     public GameObject CebainlanUI;
     public string clickid;
+    private StarkGridGamePanelManager mStarkGridGamePanelManager;
 
 
     private void Start()
     {
 
-        if (!PlayerPrefs.HasKey("FirstStart"))
-        {
-            // 执行首次启动时的操作
-            Debug.Log("首次启动应用程序");
-
-            // 在这里添加你需要在首次启动时执行的代码
-
-            // 设置键"FirstStart"，表示不是首次启动了
-            PlayerPrefs.SetInt("FirstStart", 1);
-            PlayerPrefs.Save(); // 确保保存设置
-            CebainlanUI.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("不是首次启动应用程序");
-            CebainlanUI.SetActive(false);
-        }
+        
 
 
 
 
 
-        clickid = "";
+        
 
-
-        getClickid();
-
-
-        Debug.Log("<-clickid-> " + clickid);
-
-        apiSend("active", clickid);
-
+        showGridGame();
 
 
     }
 
+    public void showGridGame()
+    {
+        mStarkGridGamePanelManager = StarkSDK.API.GetStarkGridGamePanelManager();
+        if (mStarkGridGamePanelManager != null)
+        {
+            JsonData query = new JsonData();
+            query["tt78bb0e06e7b1a4bf07"] = "";
+            JsonData position = new JsonData();
+            position["top"] = 150;
+            position["left"] = 30;
+            StarkGridGamePanel mStarkGridGamePanel = mStarkGridGamePanelManager.CreateGridGamePanel(GridGamePanelCount.One, query, GridGamePanelSize.Large, position);
+            mStarkGridGamePanel.Show();
+        }
+    }
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
 
     public void getClickid()
     {
